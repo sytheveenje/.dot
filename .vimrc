@@ -34,6 +34,7 @@ map <C-l> <C-w>l
 nmap j gj
 nmap k gk
 nmap <C-e> :e#<CR>
+:nmap <silent> <leader>d <Plug>DashSearch
 
 " Changes CTRL-P directory to working directory
 let g:ctrlp_working_path_mode = 0
