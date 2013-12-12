@@ -8,7 +8,8 @@ set matchpairs+=<:>     " specially for html
 set number              " show line numbers
 set matchtime=2         " show matching bracket for 0.2 seconds
 set title               " Show file in titlebar
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.meta 
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.meta,*.png,*.jpg
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 " Editor settings
 set ignorecase
@@ -46,6 +47,7 @@ nmap k gk
 nmap <C-e> :e#<CR>
 nmap <silent> <leader>d <Plug>DashSearch
 nnoremap <silent><Leader>/ :nohlsearch<CR>
+nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
 
 " Color settings
 set t_Co=256 " Color settings for iTerm
