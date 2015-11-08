@@ -2,18 +2,13 @@
 
 name: pp
 root: ~/Sites/paprikapatterns/web/app/themes/paprikapatterns/
+pre_window: rbenv shell 2.0.0-p247
 
 windows:
   - theme:
-      layout: 15b0,204x46,0,0[204x40,0,0,0,204x5,0,41{102x5,0,41,3,50x5,103,41,4,50x5,154,41,6}]
+      layout: 6d7a,181x40,0,0[181x36,0,0,52,181x3,0,37{90x3,0,37,53,90x3,91,37,54}]
           
       panes:
         - vim
         - cd ../../../..
-        - tail -f ../../debug.log
-        - gulp
-  - terminal:
-      layout: even-horizontal
-      panes:
-        -
         -

@@ -2,7 +2,21 @@ syntax on
 filetype plugin indent on
 filetype indent on
 
-call pathogen#runtime_append_all_bundles()
+call plug#begin('~/.vim/plugged')
+
+" Vim-plug color schemes
+Plug 'altercation/vim-colors-solarized'
+
+" Vim-plug plugins
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/syntastic'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'christoomey/vim-tmux-navigator'
+
+call plug#end()
 
 " Display settings
 set scrolloff=2         " 2 lines above/below cursor when scrolling
@@ -86,19 +100,6 @@ let g:ctrlp_map = '<Leader>o'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_components'	" CTRL-P ignore
 
-" Make Ctrl-P plugin lot faster for git projects
-" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f'] 
-" Deze twee commando's zorgen ervoor dat de custom ignore niet meer werkt ...
-" let g:ctrlp_use_caching = 0 " Nog fixen  dus ...
-
-"YouCompleteMe settings
-let g:ycm_add_preview_to_completeopt=0
-let g:ycm_confirm_extra_conf=0
-set completeopt-=preview
-
-" DelimtMate settings
-let delimitMate_expand_cr = 2
-
 " Syntastic settings
 let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_html_tidy_exec = 'tidy5'
@@ -113,37 +114,6 @@ augroup phpSyntaxOverride
   autocmd!
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
-
-let php_ignore_phpdoc=1
-let g:phpcomplete_enhance_jump_to_definition = 0
-
-" UltiSnips
-set runtimepath+=~/.vim/bundle/ultisnips
-let g:UltiSnipsEditSplit="horizontal"
-
-" Make UltiSnips and YCM play nice
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-							return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
-endfunction
-
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-e>"
-" this mapping Enter key to <C-y> to chose the current highlight item 
-" and close the selection list, same as other IDEs.
-" CONFLICT with some plugins like tpope/Endwise
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Reload .vimrc whenever it changes
 augroup reload_vimrc " {
