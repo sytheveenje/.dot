@@ -1,0 +1,24 @@
+[user]
+	name = Stef Thoen
+	email = stef@baardbaard.nl
+[github]
+	user = Baardbaard
+	token = c7b05668cadf96a2fd697358a9d4a275
+[core]
+	excludesfile = /Users/stef/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[alias]
+	co = checkout
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	today = log --since=7am --pretty=oneline
+[push]
+	default = matching
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
