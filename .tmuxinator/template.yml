@@ -1,0 +1,12 @@
+# ~/.tmuxinator/template.yml
+
+name: template
+root: ~/Sites/template
+
+windows:
+  - editor:
+      layout: 18cc,204x46,0,0{140x46,0,0,0,63x46,141,0[63x23,141,0,1,63x22,141,24,2]}
+      panes:
+        - vim
+        - gulp
+        - 
