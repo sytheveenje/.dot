@@ -2,18 +2,13 @@
 
 name: bane
 root: ~/Sites/bane
+pre_window: rbenv shell 2.2.3
 
 windows:
-  - theme:
-      layout: 15b0,204x46,0,0[204x40,0,0,0,204x5,0,41{102x5,0,41,3,50x5,103,41,4,50x5,154,41,6}]
-          
+  - vim:
       panes:
         - vim
-        - cd ../../../..
+  - terminal:
+      panes:
         - php artisan serve
         - gulp watch
-  - terminal:
-      layout: even-horizontal
-      panes:
-        -
-        -
