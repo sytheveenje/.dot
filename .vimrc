@@ -14,7 +14,10 @@ Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'jwalton512/vim-blade'
+Plug 'embear/vim-localvimrc'
 
 call plug#end()
 
