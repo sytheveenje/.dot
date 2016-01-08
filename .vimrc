@@ -31,10 +31,9 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.meta,*.png,*.jpg
 set colorcolumn=80      " Mark where column is at 80 characters
 
 " Code formatting
-set tabstop=2           " number of columns in tab
-set softtabstop=2       " number of columns in tab when editing
-set shiftwidth=2        " number of columns indented with the indent operator
-set noexpandtab         " tabs are tabs, not spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
 set smartindent
 set autoindent
 
