@@ -2,7 +2,6 @@ export EDITOR=vim
 export VISUAL=vim
 
 alias vim='/usr/local/bin/vim'
-# alias mux='/Users/stef/.rvm/gems/ruby-2.1.1/bin/tmuxinator'
 alias be='bundle exec '
 alias bower='noglob bower'
 alias wf='ssh baardbaard@baarbaard.webfactional.com'
@@ -24,3 +23,7 @@ setopt extended_glob  # Turn on the more powerful pattern matching features.
 
 # Add CD paths
 cdpath=($HOME/Sites)
+
+# Vim in ZSH settings
+bindkey -v
+export KEYTIMEOUT=1
