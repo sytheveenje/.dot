@@ -32,9 +32,12 @@
 .Spotlight-V100
 .Trashes
 .sass-cache
-vendor
 node_modules
 # bower_components
 ehthumbs.db
 Thumbs.db
 *.swp
+
+# Local settings #
+######################
+.lvimrc
