@@ -18,6 +18,8 @@ Plug 'tpope/vim-repeat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jwalton512/vim-blade'
 Plug 'embear/vim-localvimrc'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'rking/ag.vim'
 
 call plug#end()
 
@@ -32,8 +34,9 @@ set colorcolumn=80      " Mark where column is at 80 characters
 
 " Code formatting
 set tabstop=4
+set softtabstop=4       " number of columns in tab when editing
 set shiftwidth=4
-set expandtab
+set noexpandtab
 set smartindent
 set autoindent
 
@@ -102,6 +105,10 @@ let g:ctrlp_map = '<Leader>o'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_components'	" CTRL-P ignore
 
+" Ag.vim settings: The Silver Searcher
+nnoremap \ :Ag<SPACE>   " Activate with \
+let g:ag_working_path_mode="r" " start searching from your project root instead of the cwd
+
 " Syntastic settings
 let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_html_tidy_exec = 'tidy5'
@@ -119,6 +126,13 @@ augroup END
 
 " Reload .vimrc whenever it changes
 augroup reload_vimrc " {
-	autocmd!
-	autocmd BufWritePost $MYVIMRC source $MYVIMRC
+  autocmd!
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
+
+" Vim-indent-guides settings
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+let g:indent_guides_guide_start_level = 2
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=230
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=254
