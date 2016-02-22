@@ -5,6 +5,7 @@ alias vim='/usr/local/bin/vim'
 alias be='bundle exec '
 alias bower='noglob bower'
 alias wf='ssh baardbaard@baarbaard.webfactional.com'
+alias burst='sleep 1500; terminal-notifier -message "Pauze, yay!" -title "Break" &'
 
 # Source Prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
