@@ -12,6 +12,9 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# Source Composer
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+
 # Source Rbenv
 export PATH="$HOME/.rbenv/bin:$PATH" # Add Rbenv to PATH
 eval "$(rbenv init -)"
