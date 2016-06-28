@@ -205,6 +205,20 @@ function! PhpSyntaxOverride()
   hi! def link phpDocParam phpType
 endfunction
 
+" Strips trailing whitespace when file is saved
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+autocmd BufWritePre *.php,*.js,*.scss :call <SID>StripTrailingWhitespaces()
+
 " PHP doc {{{2
 noremap <leader>pd :call PhpDoc()<CR>
 
