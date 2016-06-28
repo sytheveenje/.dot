@@ -19,6 +19,10 @@ export PATH="$PATH:$HOME/.composer/vendor/bin"
 export PATH="$HOME/.rbenv/bin:$PATH" # Add Rbenv to PATH
 eval "$(rbenv init -)"
 
+# Find NVM
+export NVM_DIR="$HOME/.nvm"
+  . "$(brew --prefix nvm)/nvm.sh"
+
 # Find MSYQL
 export PATH="/usr/local/mysql/bin:$PATH"
 
