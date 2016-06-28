@@ -37,6 +37,7 @@ ehthumbs.db
 Thumbs.db
 *.swp
 
-# Local settings #
+# Application generated files #
 ######################
+tags
 .lvimrc
