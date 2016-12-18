@@ -13,10 +13,13 @@ Plug 'scrooloose/syntastic'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'tommcdo/vim-fubitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jwalton512/vim-blade'
+Plug 'mustache/vim-mustache-handlebars'
 Plug 'evidens/vim-twig'
 Plug 'embear/vim-localvimrc'
 Plug 'rking/ag.vim'
@@ -27,6 +30,13 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki'
 Plug 'majutsushi/tagbar'
+Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'elmcast/elm-vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'kylef/apiblueprint.vim'
 
 call plug#end()
 
@@ -38,6 +48,8 @@ set matchtime=2         " show matching bracket for 0.2 seconds
 set title               " Show file in titlebar
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.meta,*.png,*.jpg
 set colorcolumn=80      " Mark where column is at 80 characters
+
+au BufRead,BufNewFile *.md setlocal textwidth=80 " Set texwidth for markdown
 
 " Make cursorline only visible in active window
 augroup highlight_follows_focus
@@ -174,6 +186,7 @@ set pastetoggle=<f5>
 let g:ctrlp_map = '<Leader>o'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_components'	" CTRL-P ignore
+nnoremap <leader>i :CtrlPTag<cr>
 
 " Ag.vim: The Silver Searcher {{{2
 " nmap \ :Ag<space>
@@ -190,20 +203,42 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_html_tidy_exec = 'tidy5'
 
+" let g:netrw_altv = 1
+" let g:netrw_banner = 0
+" let g:netrw_browse_split = 4
+" let g:netrw_liststyle = 3
+" let g:netrw_winsize = -28
+" let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro rnu'  " --> I want line numbers on the netrw buffer
+" nnoremap <silent> <leader>k :Lexplore<cr>
+
 " Netwr {{{2
-let g:netrw_altv = 1
+" hide banner
 let g:netrw_banner = 0
+" hide swp, DS_Store files
+let g:netrw_list_hide='.*\.swp$,\.DS_Store'
+" set tree style listing
+let g:netrw_liststyle=3
+" display directories first
+let g:netrw_sort_sequence='[\/]$'
+" ignore case on sorting
+let g:netrw_sort_options='i'
+" vspilt netrw to the left window 
+let g:netrw_altv = 1
+" 30% of the screen for the netrw window, 70% for the file window
+let g:netrw_winsize = 30
+" open file in a previous buffer (right window)
 let g:netrw_browse_split = 4
-let g:netrw_liststyle = 3
-let g:netrw_winsize = -28
-let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro rnu'  " --> I want line numbers on the netrw buffer
-nnoremap <silent> <leader>k :Lexplore<cr>
+" buffer setting
+let g:netrw_bufsettings = 'nomodifiable nomodified readonly nobuflisted nowrap number'
 
 " php.vim  {{{2
 function! PhpSyntaxOverride()
   hi! def link phpDocTags  phpDefine
   hi! def link phpDocParam phpType
 endfunction
+
+" fugitive-gitlab.vim
+Plug 'tommcdo/vim-fubitive'
 
 " Strips trailing whitespace when file is saved
 function! <SID>StripTrailingWhitespaces()
@@ -231,13 +266,32 @@ augroup phpSyntaxOverride
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
+" Autocompletion {{{2
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
+" PHPUnit tests {{{2
+nmap <leader>t :!clear && phpunit<cr>
+nmap <leader>f :!clear && phpunit %<cr>
+nmap <leader>m yiw:!clear && phpunit --filter " %<cr>
+
+" Elm
+let g:elm_format_autosave = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:elm_syntastic_show_warnings = 1
+
+" Don't hide JSON quotes
+let g:vim_json_syntax_conceal = 0
 
 " Tips & Tricks {{{1
-
+"
 " Ctags {{{2
-" :tag      Search for instance.
-" :tn       Go to next instance.
-" :tp       Go to previous instance.
-" :ts       Get list of instances.
+" :tag       Search for instance.
+" :tn        Go to next instance.
+" :tp        Go to previous instance.
+" :ts        Get list of instances.
+" C-]        Go to defition on cursor.
+" <leader>-i Open CTRLP with ctags.
+" <leader>-b Open Tagbar with ctags on right side.
 
 " :so %     Reload .vimrc file

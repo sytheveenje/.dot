@@ -6,6 +6,8 @@ alias be='bundle exec '
 alias bower='noglob bower'
 alias wf='ssh baardbaard@baarbaard.webfactional.com'
 alias burst='sleep 1500; terminal-notifier -message "Pauze, yay!" -title "Break" &'
+alias ct='ctags -R --exclude=.git --exclude=node_modules'
+alias comp='php -n /usr/local/bin/composer'
 
 # Source Prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
