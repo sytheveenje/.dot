@@ -4,243 +4,184 @@ filetype indent on
 
 call plug#begin('~/.vim/plugged')
 
-" Vim-plug color schemes {{{1
+" Vim-plug color schemes
 Plug 'altercation/vim-colors-solarized'
 
-" Vim-plug plugins {{{1
-"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'scrooloose/syntastic'
+" Vim-plug plugins
+Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'shumphrey/fugitive-gitlab.vim'
-Plug 'tommcdo/vim-fubitive'
+Plug 'justinj/vim-pico8-syntax'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jwalton512/vim-blade'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'evidens/vim-twig'
-Plug 'embear/vim-localvimrc'
-Plug 'rking/ag.vim'
-Plug 'Chun-Yang/vim-action-ag'
-Plug 'Yggdroot/indentLine'
+Plug 'lumiliet/vim-twig'
 Plug 'vexxor/phpdoc.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vimwiki/vimwiki'
-Plug 'majutsushi/tagbar'
-Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
 Plug 'elmcast/elm-vim'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'pangloss/vim-javascript'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'kylef/apiblueprint.vim'
+Plug 'mileszs/ack.vim'
+" Plug 'shumphrey/fugitive-gitlab.vim'
+" Plug 'tommcdo/vim-fubitive'
+Plug 'embear/vim-localvimrc'
+" Plug 'Chun-Yang/vim-action-ag'
+" Plug 'Yggdroot/indentLine'
+" Plug 'joonty/vim-phpqa'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'majutsushi/tagbar'
+" Plug 'ervandew/supertab'
+" Plug 'jelera/vim-javascript-syntax'
+" Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'tommcdo/vim-fubitive'
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'scrooloose/syntastic'
+" Plug 'neomake/neomake'
 
 call plug#end()
 
-" Display {{{1
-set scrolloff=2         " 2 lines above/below cursor when scrolling
-set matchpairs+=<:>     " specially for html
-set number              " show line numbers
-set matchtime=2         " show matching bracket for 0.2 seconds
-set title               " Show file in titlebar
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.meta,*.png,*.jpg
-set colorcolumn=80      " Mark where column is at 80 characters
+" Editor settings
+syntax enable           " Switches on syntax highlighting.
+set scrolloff=2         " 2 lines above/below cursor when scrolling.
+set matchpairs+=<:>     " Specially for HTML.
+set number              " Show line numbers.
+set matchtime=2         " Show matching bracket for 0.2 seconds.
+set title               " Show file in titlebar.
+set colorcolumn=80      " Mark where column is at 80 characters.
+set autoread            " Reload files when they are updated.
+set linebreak           " On long lines break at a good point.
+set laststatus=1        " Always show the statusline.
+set equalalways         " Windows are same size when splitting.
+set nofoldenable        " Disable code folding.
+set background=dark     " Will try to use colors that will look good on dark background.
+set diffopt+=vertical
+colorscheme solarized
 
-au BufRead,BufNewFile *.md setlocal textwidth=80 " Set texwidth for markdown
+" Code format settings
+set tabstop=4           " Width of a hard tabstop measured in spaces.
+set softtabstop=4       " Number of spaces that tab counts while editing.
+set shiftwidth=4        " Size of an indent.
+set noexpandtab         " Don't insert spaces instead of tab characters.
+set smartindent         " Do smart auto-indenting when starting a new line.
+set autoindent          " Copy indent from current line when starting a new line.
+:filetype indent on     " When file is edited, it's plugin file is loaded.
 
-" Make cursorline only visible in active window
-augroup highlight_follows_focus
-    autocmd!
-    autocmd WinEnter * set cursorline
-    autocmd WinLeave * set nocursorline
-augroup END
+" Search
+set ignorecase          " Case-insensitive search.
+set smartcase           " Case-sensitive search if query contains caps.
+set incsearch           " Search as you type.
+set hlsearch            " Highlight search results.
 
-augroup highligh_follows_vim
-    autocmd!
-    autocmd FocusGained * set cursorline
-    autocmd FocusLost * set nocursorline
-augroup END
+" System
+set nocompatible        " Disable vi-compatibility. Gets ignored by Nvim.
+set nobackup            " Don't make backups.
+set nowritebackup       " Don't make backups before overwriting a file.
+set noswapfile          " Don't use a swap file for the buffer.
+set encoding=utf-8      " Necessary to show Unicode glyphs.
+set undofile            " Persistent undo.
+set undodir=~/.vim/undodir " Directory of persistent undo.
+set clipboard+=unnamedplus " Use clipboard of system.
 
-" Code formatting {{{1
-set tabstop=4
-set softtabstop=4       " number of columns in tab when editing
-set shiftwidth=4
-set noexpandtab
-set smartindent
-set autoindent
+" Netwr
+let g:netrw_banner = 0                         " Hide banner.
+let g:netrw_liststyle=3                        " Set tree style listing.
+let g:netrw_browse_split = 4                   " Open file in a previous buffer (right window).
+let g:netrw_altv = 1                           " Vspilt netrw to the left window.
+let g:netrw_winsize = 25                       " 25% of the screen for the netrw window.
+let g:netrw_list_hide='netrw_gitignore#Hide()' " Hide stuff in your .gitingore
+let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S+'   " Hide swp, DS_Store files.
+let g:netrw_sort_sequence='[\/]$'              " Display directories first.
+let g:netrw_sort_options='i'                   " Ignore case on sorting.
+let g:netrw_bufsettings = 'nomodifiable nomodified readonly nobuflisted nowrap number' " Buffer setting.
 
-" PHP folding
-" let php_folding=1
+" JSON
+let g:vim_json_syntax_conceal = 0 " Don't hide JSON quotes.
 
-" Editor {{{1
-set autoread            " reload files when they are updated
-set linebreak
-set cursorline
-set laststatus=1        " always show the statusline
-set equalalways
-set nofoldenable        " disable folding
-:filetype indent on
+" Commands
+command! MakeTags !ctags -R .
 
-" Reload .vimrc whenever it changes
-" augroup reload_vimrc " {
-"   autocmd!
-"   autocmd BufWritePost $MYVIMRC source $MYVIMRC
-" augroup END " }
-
-" virtual tabstops using spaces
-let my_tab=4
-execute "set shiftwidth=".my_tab
-execute "set softtabstop=".my_tab
-set expandtab
-" allow toggling between local and default mode
-function! TabToggle()
-  if &expandtab
-    set shiftwidth=4
-    set softtabstop=0
-    set noexpandtab
-  else
-    execute "set shiftwidth=".g:my_tab
-    execute "set softtabstop=".g:my_tab
-    set expandtab
-  endif
-endfunction
-nmap <F9> mz:execute TabToggle()<CR>'z
-
+" Mappings: Window resizing
 nnoremap <Left> :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
 nnoremap <Up> :resize -2<CR>
 nnoremap <Down> :resize +2<CR>
 
-" Persistent undo
-set undofile
-set undodir=~/.vim/undodir
-
-" Search {{{1
-set ignorecase          " case-insensitive search
-set smartcase           " case-sensitive searc if query contains caps
-set incsearch           " search as you type
-set hlsearch            " highlight search results
-
-" System {{{1
-set nobackup
-set nowritebackup
-set noswapfile
-set nocompatible        " Disable vi-compatibility
-set encoding=utf-8      " Necessary to show Unicode glyphs
-set listchars=tab:▸\ ,eol:¬
-set clipboard=unnamed
-
-" Color {{{1
-syntax enable
-set background=light
-colorscheme solarized
-
-" Remapping {{{1
-nnoremap <Space> <Nop>
-map <Space> <Leader>
+" Mappings: Movement
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-nmap <silent> <C-D> :Lexplore<CR>
-nmap <silent> <Leader>l :set list!<CR>
-nmap j gj
-nmap k gk
-nmap <C-e> :e#<CR>
-nmap <silent><leader>d <Plug>DashSearch
-nmap <Leader><Leader> V
-vmap <Leader>y "+y      " Copy & paste to system clipboard
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+
+" Mappings: PHPUnit tests
+nmap <leader>t :!clear && phpunit<cr>
+nmap <leader>f :!clear && phpunit %<cr>
+nmap <leader>m yiw:!clear && phpunit --filter " %<cr>
+
+" Yarn run scripts
+map <leader>b :!yarn run build<cr> 
+
+" Mappings: Snippets
+nnoremap <Leader>html :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
+
+" Mappings: Misc
+" Make spacebar the leader.
+nnoremap <Space> <Nop>
+let mapleader = "\<Space>"
+" Open file explorer.
+nmap <silent><C-D> :Lexplore<CR>
+" map <C-D> :NERDTreeToggle<CR>
+" Toggle list.
+nmap <silent><Leader>l :set list!<CR>
+" Remove search highlight.
 nnoremap <silent><Leader>/ :nohlsearch<CR>
-nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
-nnoremap <silent><Leader>w :w<CR> " Save file
-vnoremap <silent> y y`]
-vnoremap <silent> p p`]
-nnoremap <silent> p p`]
-vmap <Leader>P "+P
-nmap <leader>wcd :VimwikiMakeDiaryNote<cr>
-nmap <Leader>f :tag<space>
-
-"Tag bar
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
-
-"
-nnoremap <silent> <Leader>t :CtrlPTag<CR>
-
-" Toggle settings {{{1
+" Save file.
+nnoremap <silent><Leader>w :w<CR>
+" Toggles the tagbar.
+" nnoremap <silent><Leader>b :TagbarToggle<CR>
+" PHP doc
+noremap <leader>pd :call PhpDoc()<CR>
+" Toggle paste.
 set pastetoggle=<f5>
 
-" Plugin settings {{{1
-
-" IndentLine {{{2
-
-" CTRL-P {{{2
-let g:ctrlp_map = '<Leader>o'
+" Plugin: CTRL-P
+let g:ctrlp_map = '<Leader>o' " Open CTRL-P.
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_components'	" CTRL-P ignore
-nnoremap <leader>i :CtrlPTag<cr>
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_components\|dist'	" CTRL-P ignore.
 
-" Ag.vim: The Silver Searcher {{{2
-" nmap \ :Ag<space>
-let g:ag_working_path_mode="r" " start searching from your project root instead of the cwd
+" Plugin: Ag.vim - The Silver Searcher
+let g:ag_working_path_mode="r" " Start searching from your project root instead of the cwd.
 
-" Syntastic  {{{2
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Plugin: Ale
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+" Plugin: Elm
+let g:elm_format_autosave = 1
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_scss_checkers = ['scss_lint']
-let g:syntastic_html_tidy_exec = 'tidy5'
+let g:syntastic_auto_loc_list = 1
+let g:elm_syntastic_show_warnings = 1
 
-" let g:netrw_altv = 1
-" let g:netrw_banner = 0
-" let g:netrw_browse_split = 4
-" let g:netrw_liststyle = 3
-" let g:netrw_winsize = -28
-" let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro rnu'  " --> I want line numbers on the netrw buffer
-" nnoremap <silent> <leader>k :Lexplore<cr>
+" Plugin: Editorconfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
 
-" Netwr {{{2
-" hide banner
-let g:netrw_banner = 0
-" hide swp, DS_Store files
-let g:netrw_list_hide='.*\.swp$,\.DS_Store'
-" set tree style listing
-let g:netrw_liststyle=3
-" display directories first
-let g:netrw_sort_sequence='[\/]$'
-" ignore case on sorting
-let g:netrw_sort_options='i'
-" vspilt netrw to the left window 
-let g:netrw_altv = 1
-" 30% of the screen for the netrw window, 70% for the file window
-let g:netrw_winsize = 30
-" open file in a previous buffer (right window)
-let g:netrw_browse_split = 4
-" buffer setting
-let g:netrw_bufsettings = 'nomodifiable nomodified readonly nobuflisted nowrap number'
-
-" php.vim  {{{2
+" Plugin: php.vim
 function! PhpSyntaxOverride()
   hi! def link phpDocTags  phpDefine
   hi! def link phpDocParam phpType
 endfunction
 
-" fugitive-gitlab.vim
-Plug 'tommcdo/vim-fubitive'
+" Plugin: vim-phpqa
+" let g:phpqa_codesniffer_autorun = 0
+let g:phpqa_codesniffer_cmd='./vendor/bin/phpcs'
 
-" Strips trailing whitespace when file is saved
+" Function: Strips trailing whitespace when file is saved.
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
     let _s=@/
@@ -254,44 +195,50 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 autocmd BufWritePre *.php,*.js,*.scss :call <SID>StripTrailingWhitespaces()
 
-" PHP doc {{{2
-noremap <leader>pd :call PhpDoc()<CR>
-
-" Vimwiki {{{2
-let g:vimwiki_hl_headers = 1
-let g:vimwiki_hl_cb_checked = 1
-
-augroup phpSyntaxOverride
-  autocmd!
-  autocmd FileType php call PhpSyntaxOverride()
+" Function: Make cursorline only visible in active window.
+augroup highlight_follows_focus
+    autocmd!
+    autocmd WinEnter * set cursorline
+    autocmd WinLeave * set nocursorline
 augroup END
 
-" Autocompletion {{{2
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+augroup highligh_follows_vim
+    autocmd!
+    autocmd FocusGained * set cursorline
+    autocmd FocusLost * set nocursorline
+augroup END
 
-" PHPUnit tests {{{2
-nmap <leader>t :!clear && phpunit<cr>
-nmap <leader>f :!clear && phpunit %<cr>
-nmap <leader>m yiw:!clear && phpunit --filter " %<cr>
+" Function: Switch between tabs and spaces with <F9>.
+let my_tab=4
+execute "set shiftwidth=".my_tab
+execute "set softtabstop=".my_tab
+set expandtab
+" Allow toggling between local and default mode.
+function! TabToggle()
+  if &expandtab
+    set shiftwidth=4
+    set softtabstop=0
+    set noexpandtab
+  else
+    execute "set shiftwidth=".g:my_tab
+    execute "set softtabstop=".g:my_tab
+    set expandtab
+  endif
+endfunction
+nmap <F9> mz:execute TabToggle()<CR>'z
 
-" Elm
-let g:elm_format_autosave = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:elm_syntastic_show_warnings = 1
-
-" Don't hide JSON quotes
-let g:vim_json_syntax_conceal = 0
-
-" Tips & Tricks {{{1
+" !! Don't know what everything below this line does. !!
+" set listchars=tab:▸\ ,eol:¬ 
+" vnoremap <silent> y y`]
+" vnoremap <silent> p p`]
+" nnoremap <silent> p p`]
+" vmap <Leader>P "+P
+" nmap j gj
+" nmap k gk
+" nmap <C-e> :e#<CR>
+" nnoremap <leader>i :CtrlPTag<cr>
 "
-" Ctags {{{2
-" :tag       Search for instance.
-" :tn        Go to next instance.
-" :tp        Go to previous instance.
-" :ts        Get list of instances.
-" C-]        Go to defition on cursor.
-" <leader>-i Open CTRLP with ctags.
-" <leader>-b Open Tagbar with ctags on right side.
-
-" :so %     Reload .vimrc file
+" augroup phpSyntaxOverride
+"   autocmd!
+"   autocmd FileType php call PhpSyntaxOverride()
+" augroup END
